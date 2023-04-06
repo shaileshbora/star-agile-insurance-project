@@ -41,9 +41,16 @@ pipeline {
         }
       }
       stage('Pipeline Status') {
-        steps {
-	 sh 'echo "Pipeline successful"'
-	 }
-      }
+            steps {
+                script {
+                    try {
+                        // do something that fails
+                        sh "exit 1"
+                    } catch (Exception err) {
+                        currentBuild.result = 'SUCCESS'
+                    }
+                }
+            }
+        }
       }
       }
