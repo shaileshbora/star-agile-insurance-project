@@ -9,7 +9,7 @@ pipeline {
     stage('Checkout') {
        steps {
          echo 'Checkout the code from GitRepo'
-         git 'https://github.com/devopscbabu/star-agile-insurance-project.git'
+         git 'https://github.com/shaileshbora/star-agile-insurance-project.git'
 	 }
        }
     stage('Build the Application'){
@@ -25,14 +25,13 @@ pipeline {
 	}
     stage('Docker Image Creation') {
         steps {
-	sh 'docker build -t cbabu85/insureapp:latest .'
-        }
+	sh 'docker build -t shaileshbora/insure_me_project1:1.0 .'     }
       }
     stage('Push Image to DockerHub') {
       steps {
      withCredentials([usernamePassword(credentialsId: 'docker-hub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
       sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
-      sh 'docker push cbabu85/insureapp:latest'
+      sh 'docker push shaileshbora/insure_me_project1:1.0'
       }
       }
       }
