@@ -40,17 +40,5 @@ pipeline {
 	 ansiblePlaybook credentialsId: 'prod-server', disableHostKeyChecking: true, installation: 'ansible', inventory: '/etc/ansible/hosts', playbook: 'deploy-playbook.yml'
         }
       }
-      stage('Pipeline Status') {
-            steps {
-                script {
-                    try {
-                        // do something that fails
-                        sh "exit 1"
-                    } catch (Exception err) {
-                        currentBuild.result = 'SUCCESS'
-                    }
-                }
-            }
-        }
       }
       }
